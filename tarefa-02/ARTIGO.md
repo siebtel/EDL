@@ -21,7 +21,7 @@ Lembrando que esse quadro de comparação abaixo não é exato, serve apenas com
 |Tipos          |Termos            |
 |Condições       |Regras|
 
-- Criar um banco de dados em prolog é muitos simples, utilizando predicados e termos que constituem os fatos. Depois podemos fazer perguntas para o programa para saber se o fato é *true* ou *false*. Enquanto que em C++, precisamos criar toda a nossa composição da maneira que melhor nos atende. Por exemplo, no nosso caso que veremos a seguir, utilizamos o quê achamos mais otimizado e fácil de implementar, um struct com um campo de vetor de struct com vetores de strings. Enquanto que no Prolog, foram vários fatos, utilizando predicados onde os termos são listas ou átomos.
+- Criar um banco de dados em prolog é muitos simples, utilizando predicados e átomos que constituem os fatos. Depois podemos fazer perguntas para o programa para saber se o fato é *true* ou *false*. Enquanto que em C++, precisamos criar toda a nossa composição da maneira que melhor nos atende. Por exemplo, no nosso caso que veremos a seguir, utilizamos o quê achamos mais otimizado e fácil de implementar, um struct com um campo de vetor de struct com vetores de strings. Enquanto que no Prolog, foram vários fatos, utilizando predicados onde os termos são listas ou átomos.
 - Uma outra expressividade é a recursão. Podemos tanto usar a recursão de forma explícita quanto implicitamente. Mostraremos mais nos exemplos a seguir.
 
 ## Exemplo 1
@@ -256,3 +256,14 @@ int main(int argc, char* argv[])
     }
 }
 ```
+Bibliografia:
+
+[Qual a diferença entre uma linguagem estática e dinâmica?](https://pt.stackoverflow.com/questions/21508/qual-a-diferen%C3%A7a-entre-uma-linguagem-de-programa%C3%A7%C3%A3o-est%C3%A1tica-e-din%C3%A2mica)
+
+[Árvore Genealógica dos deuses](https://pt.wikipedia.org/wiki/Genealogia_dos_deuses_gregos#Primeira_gera%C3%A7%C3%A3o)
+
+[An Introduction to Prolog Programming, by Ulle Endriss, University of Amsterdam](https://staff.science.uva.nl/u.endriss/teaching/prolog/prolog.pdf)
+
+[Swish-Prolog sistema e como utilizá-lo](http://www.swi-prolog.org/)
+
+[História e origens](https://en.wikipedia.org/wiki/Prolog)
