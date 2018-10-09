@@ -10,10 +10,58 @@ Usando a lógica clássica, essa condição poderia ser escrita assim:
     (p∧q∧...∧t) ➡ u
 
 ## Classificação
-Prolog é uma linguagem lógica, estática, e é usada principalmente em Inteligencia Artificial (Processamento de linguagem natural) - pela sua facilidade de implementação em buscas de banco de dados -. 
+Prolog é uma linguagem lógica, declarativa, estática, e é usada principalmente em Inteligencia Artificial (Processamento de linguagem natural) - pela sua facilidade de implementação em buscas de banco de dados.
 
 ## Comparação
 C++ vs Prolog
+ Prolog, diferente de outras linguagens, funciona com queries, você pergunta pro sistema (interpretador) algo você está usando sobre alguma relação que você criou anteriormente no seu arquivo .pl (extensão do prolog). E o sistema irá retornar *true* ou *false*. Pode retornar também as instâncias que a variável carrega.
+ É importante frisar que usamos relações e termos que temos conhecimento, ou que faz sentido para o mundo que conhecemos para uma melhor utilização do prolog. 
+ 
+ Vamos compilar um programa exemplo e mostrar como funciona.
+
+```prolog
+/*Este e o programa exemplo testes.pl*/
+bigger(elephant, horse).
+bigger(horse, donkey).
+bigger(donkey, dog).
+bigger(donkey, monkey).
+```
+Como podem ver abaixo, no sistema já temos um '?' antes da query, justamente para ter uma noção de pergunta. Primeiro compilamos o arquivo (em cada sistema pode ser diferente). Depois perguntamos ao sistema se o donkey tem relação de bigger com o dog. Como podemos ver acima, existe essa relação, fazendo com que retorne *true*.
+```
+?- ['testes.pl'].
+true.
+
+?- bigger(donkey, dog).
+true.
+```
+Porém, se perguntarmos se o elephant tem relação de bigger com o monkey, ele responderá que não, pois não fizemos essa relação no nosso programa. Ainda que um elefante seja maior que o macaco se seguirmos o fato do nosso mundo. Então para conseguirmos achar essa relação, precisamos colocá-la no nosso programa. Sabemos que os elefantes são maiores que os cavalos, que são maiores que os burros, que são maiores que os macacos. Isso lembra a relação de transitividade de matemática. Se aRb e bRc então aRc.	
+
+```prolog
+is_bigger(X, Y) :- bigger(X, Y).
+is_bigger(X, Y) :- bigger(X, Z), is_bigger(Z, Y).
+```
+Essas duas linhas representam regras, o  :-  é uma condição da direita pra esquerda e podemos ter várias condições separadas por vírgulas. E agora pra perguntar, usaremos a nova relação criada is_bigger. o Prolog ainda não vai achar na primeira regra, pois não há bigger(elephant, monkey). Então ele vai entrar na segunda e instanciar o X como elephant e Y como monkey. A regra diz que para a relação is_bigger(elephant, monkey) o Prolog deve provar os dois objetivos bigger(elephant, Z) e is_bigger(Z, monkey). O bigger(elephant, Z) irá instanciar o Z como o primeiro termo que ele achar no programa q satisfaz essa relação, no caso, Z = horse. E depois todas as ocorrencias de Z serão instanciadas da mesma forma. E assim chamar o is_bigger(horse, monkey), e depois fazer o mesmo processo. Isso ficará acontecendo recursivamente até passar por todas as instancias possíveis.
+
+```
+?- is_bigger(elephant,monkey).
+true .
+```
+E podemos ver quais foram as instancias que ele fez abaixo:
+```
+?- is_bigger(elephant,Z).
+Z = horse ;
+Z = donkey ;
+Z = dog ;
+Z = monkey ;
+false.
+```
+E quando ele instanciar Z = monkey, a regra is_bigger(X, Y) :- bigger(X, Y). dará *true*.
+
+Obs: nessa última query, retornou *false* pois não há mais nenhum item a ser instanciado.
+
+Visto esse exemplo base, podemos partir para as expressividades da linguagem.
+
+---
 Lembrando que esse quadro de comparação abaixo não é exato, serve apenas como um guia inicial.
 |C++                         |Prolog                 |
 |---------------------|----------------------------|
@@ -25,7 +73,8 @@ Lembrando que esse quadro de comparação abaixo não é exato, serve apenas com
 - Uma outra expressividade é a recursão. Podemos tanto usar a recursão de forma explícita quanto implicitamente. Mostraremos mais nos exemplos a seguir.
 
 ## Exemplo 1
-Esse exemplo serve para mostrar como é feito a recursão tentando calcular o Fatorial. Em Prolog não temos declarações do tipo de variável, assim como não tem utilização de while. Ambos fazem exatamente o mesmo. Recursão para o cálculo, entrada "infinita", pois como podem ver o while no C++ não tem parada, enquanto que o prolog nem utiliza estrutura de repetição como o while ou o for.
+Esse exemplo serve para mostrar como é feito a recursão tentando calcular o Fatorial. Em Prolog não temos declarações do tipo de variável, assim como não tem utilização de while. Ambos fazem exatamente o mesmo. 
+
 ##### Prolog
 ---
 ```prolog
@@ -61,6 +110,10 @@ int main(){
 	return 0;
 }
 ```
+Agora vamos olhar mais atentamente o programa e falar as principais diferenças entre as duas linguagens.
+
+
+
 
 ## Exemplo 2
 Já nesse exemplo, há várias diferenças. Usamos recursão (afinal, para percorrer por uma lista, ou por fatos, sempre haverá recursão em prolog). Banco de dados - no caso, colocamos a família da árvore genealógica em outro arquivo para o programa em C++  -. O programa em prolog ainda faz algo mais que o nosso programa em C++ não faz, que é dizer todos os parentes de um criador (o primeiro termo dos predicados "criou( criador, quem foi criado)"). Além de termos utilizado a noção de Árvore.
