@@ -67,7 +67,7 @@ Lembrando que esse quadro de comparação abaixo não é exato, serve apenas com
 |---------------------|----------------------------|
 | Função          | Predicados            |
 |Tipos          |Termos            |
-|Condições       |Regras|
+|Condições       |Regras |
 
 - Criar um banco de dados em prolog é muitos simples, utilizando predicados e átomos que constituem os fatos. Depois podemos fazer perguntas para o programa para saber se o fato é *true* ou *false*. Enquanto que em C++, precisamos criar toda a nossa composição da maneira que melhor nos atende. Por exemplo, no nosso caso que veremos a seguir, utilizamos o quê achamos mais otimizado e fácil de implementar, um struct com um campo de vetor de struct com vetores de strings. Enquanto que no Prolog, foram vários fatos, utilizando predicados onde os termos são listas ou átomos.
 - Uma outra expressividade é a recursão. Podemos tanto usar a recursão de forma explícita quanto implicitamente. Mostraremos mais nos exemplos a seguir.
